@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { nutriscorePresent, splitStringToArray } from "@/lib";
 import { NutritionalScore } from "../nutritional-score";
-import { splitStringToArray } from "@/lib";
 import type { ProductType } from "@/types";
 import { Badge } from "../ui/badge";
 
@@ -24,13 +24,7 @@ export type ProductCardProps = {
 };
 
 export function ProductCard({ index, product }: ProductCardProps) {
-   const nutriscoreGrade = product.nutriscore_grade?.toLowerCase();
-   const isNutriScoreGradePresent =
-      nutriscoreGrade === "a" ||
-      nutriscoreGrade === "b" ||
-      nutriscoreGrade === "c" ||
-      nutriscoreGrade === "d" ||
-      nutriscoreGrade === "e";
+   const isNutriScoreGradePresent = nutriscorePresent(product.nutriscore_grade);
 
    return (
       <article className="group bg-gray-50 shadow-md">
