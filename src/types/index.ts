@@ -1,5 +1,7 @@
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
 
+export type Params = { params: { slug: string } };
+
 export type Children = Readonly<PropsWithChildren>;
 
 export type SortingType = "none" | "ascending" | "descending";

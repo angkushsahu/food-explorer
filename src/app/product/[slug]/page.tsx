@@ -1,12 +1,22 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import { axiosClient, nutriscorePresent, splitStringToArray } from "@/lib";
 import { Badge, LinkToCart, NutritionalScore } from "@/components";
 import { AddToCart } from "./_components/add-to-cart";
-import type { ProductType } from "@/types";
+import type { Params, ProductType } from "@/types";
 
-export default async function Product({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+   const response = await axiosClient.get(`/api/v0/product/${params.slug}.json`);
+   if (response.data.status !== 1) return { title: "Food Product" };
+
+   const productName: string = response.data.product.product_name_en ?? response.data.product.product_name;
+   const title = productName?.length ? productName : "Food Product";
+   return { title };
+}
+
+export default async function Product({ params }: Params) {
    const response = await axiosClient.get(`/api/v0/product/${params.slug}.json`);
    if (response.data.status !== 1) return notFound();
    const product = response.data.product as ProductType;
