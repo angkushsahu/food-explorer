@@ -4,6 +4,7 @@ import Link from "next/link";
 import { nutriscorePresent, splitStringToArray } from "@/lib";
 import { NutritionalScore } from "../nutritional-score";
 import type { ProductType } from "@/types";
+import { CartInfo } from "../cart-info";
 import { Badge } from "../ui/badge";
 
 function bgColor(index: number) {
@@ -84,6 +85,13 @@ export function ProductCard({ index, product }: ProductCardProps) {
                   Know more ....
                </Link>
             </div>
+            <CartInfo
+               id={product._id}
+               quantity={1}
+               nutriScore={product.nutriscore_grade}
+               productName={product.product_name_en ?? product.product_name}
+               productImage={product.image_front_url}
+            />
          </section>
       </article>
    );

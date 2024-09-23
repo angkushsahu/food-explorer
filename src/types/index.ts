@@ -26,7 +26,17 @@ export type ProductType = {
    labels?: string;
 };
 
+export type CartItem = {
+   id: string;
+   productImage?: string;
+   productName?: string | null;
+   nutriScore?: string | null;
+   quantity: number;
+};
+
 export type AppContextType = {
+   cart: Array<CartItem>;
+   setCart: Dispatch<SetStateAction<Array<CartItem>>>;
    searchTerms: string;
    setSearchTerms: Dispatch<SetStateAction<string>>;
    barcode: string;

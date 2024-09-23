@@ -1,12 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-
-import type { AppContextType, Children, SortingType } from "@/types";
+import type { AppContextType, CartItem, Children, SortingType } from "@/types";
 
 const AppContext = createContext<AppContextType | null | undefined>(null);
 
 export function AppContextProvider({ children }: Children) {
+   const [cart, setCart] = useState<Array<CartItem>>([]);
    const [searchTerms, setSearchTerms] = useState("");
    const [barcode, setBarcode] = useState("");
    const [category, setCategory] = useState("");
@@ -14,6 +14,8 @@ export function AppContextProvider({ children }: Children) {
    const [sortByNutritionalValue, setSortByNutritionalValue] = useState<SortingType>("none");
 
    const value: AppContextType = {
+      cart,
+      setCart,
       searchTerms,
       setSearchTerms,
       barcode,
